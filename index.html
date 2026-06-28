@@ -149,7 +149,6 @@
       background: linear-gradient(135deg, #0f2a1a 0%, #14532d 50%, #166534 100%);
       color: var(--white);
       padding: 80px 24px 90px;
-      text-align: center;
       position: relative;
       overflow: hidden;
     }
@@ -161,9 +160,35 @@
       pointer-events: none;
     }
     .hero-inner {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
       position: relative;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-text { /* left column */ }
+    .hero-image {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      aspect-ratio: 4/5;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      pointer-events: none;
     }
     .hero-badge {
       display: inline-flex;
@@ -191,13 +216,13 @@
     .hero p {
       font-size: clamp(1rem, 2.5vw, 1.2rem);
       color: #d1fae5;
-      max-width: 620px;
-      margin: 0 auto 36px;
+      max-width: 560px;
+      margin: 0 0 36px;
     }
     .hero-ctas {
       display: flex;
       gap: 14px;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
     }
     .btn-primary {
@@ -235,6 +260,7 @@
       font-size: 0.85rem;
       color: #86efac;
       opacity: 0.85;
+      text-align: left;
     }
 
     /* ── TRUST BAR ── */
@@ -342,6 +368,39 @@
 
     /* ── WHY CHOOSE US ── */
     .why { background: var(--white); }
+    .why-split {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .why-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+      aspect-ratio: 4/5;
+      position: relative;
+    }
+    .why-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .why-photo:hover img { transform: scale(1.04); }
+    .why-photo-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--green);
+      color: var(--white);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
     .why-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -377,6 +436,44 @@
 
     /* ── HOW IT WORKS ── */
     .how { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+    .how-photo-strip {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 52px;
+      height: 280px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .how-photo-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+      display: block;
+    }
+    .how-photo-strip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(20,83,45,0.55) 0%, transparent 60%);
+    }
+    .how-photo-strip-text {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      color: var(--white);
+    }
+    .how-photo-strip-text h3 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      max-width: 400px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .how-photo-strip-text h3 span { color: #86efac; }
     .steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -538,18 +635,25 @@
     }
     .quote-section h2 { color: var(--white); }
     .quote-section .section-sub { color: #d1fae5; margin: 0 auto 36px; }
-    .quote-placeholder {
-      background: rgba(255,255,255,0.1);
-      border: 2px dashed rgba(255,255,255,0.35);
-      border-radius: 12px;
-      padding: 48px 24px;
-      max-width: 560px;
+    .quote-frame-wrap {
+      max-width: 780px;
       margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: var(--white);
+      position: relative;
     }
-    .quote-placeholder p {
-      color: #86efac;
-      font-size: 0.95rem;
-      margin-bottom: 20px;
+    .quote-frame-wrap iframe {
+      display: block;
+      width: 100%;
+      border: none;
+      min-height: 820px;
+    }
+    .quote-frame-fallback {
+      display: none;
+      padding: 32px;
+      text-align: center;
     }
     .btn-quote {
       display: inline-block;
@@ -568,7 +672,7 @@
     .quote-note {
       margin-top: 14px;
       font-size: 0.82rem;
-      color: #86efac;
+      color: var(--gray);
       opacity: 0.8;
     }
 
@@ -883,6 +987,16 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      /* Hero image layout */
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero-image { aspect-ratio: 16/9; max-height: 260px; }
+      .hero p { margin: 0 0 28px; }
+      /* Why split */
+      .why-split { grid-template-columns: 1fr; gap: 36px; }
+      .why-photo { aspect-ratio: 16/9; }
+      /* How photo */
+      .how-photo-strip { height: 200px; }
+      .how-photo-strip-text { padding: 0 24px; }
       /* Nav */
       .nav-links { display: none; }
       .nav-phone .btn-nav { display: none; }
@@ -925,6 +1039,8 @@
     }
 
     @media (max-width: 480px) {
+      .hero-image { display: none; } /* hide on very small phones to save space */
+      .how-photo-strip { height: 160px; }
       /* Sections */
       section { padding: 44px 16px; }
       .hero { padding: 44px 16px 52px; }
@@ -968,7 +1084,7 @@
       .faq-a { padding: 0 16px 14px; }
 
       /* Quote section */
-      .quote-placeholder { padding: 32px 16px; }
+      .quote-frame-wrap iframe { min-height: 1000px; }
     }
   </style>
 </head>
@@ -1021,14 +1137,23 @@
     <span style="left:70%;top:50%;font-size:1rem;animation-duration:7.5s;animation-delay:0.8s;">🐾</span>
   </div>
   <div class="hero-inner">
-    <div class="hero-badge">🐾 Serving Phoenix & Metro Phoenix</div>
-    <h1>Say Goodbye to<br /><em>Picking Up After Your Dog</em></h1>
-    <p>Reliable, professional dog waste removal so you can enjoy a clean yard — without touching a thing. Weekly, bi-weekly, and one-time cleanups available.</p>
-    <div class="hero-ctas">
-      <a href="#get-quote" class="btn-primary">🐶 Get My Free Quote</a>
-      <a href="tel:6024929972" class="btn-secondary">📞 Call 602-492-9972</a>
+    <div class="hero-text">
+      <div class="hero-badge">🐾 Serving Phoenix & Metro Phoenix</div>
+      <h1>Say Goodbye to<br /><em>Picking Up After Your Dog</em></h1>
+      <p>Reliable, professional dog waste removal so you can enjoy a clean yard — without touching a thing. Weekly, bi-weekly, and one-time cleanups available.</p>
+      <div class="hero-ctas">
+        <a href="#get-quote" class="btn-primary">🐶 Get My Free Quote</a>
+        <a href="tel:6024929972" class="btn-secondary">📞 Call 602-492-9972</a>
+      </div>
+      <p class="hero-note">✓ Free deodorizer spray with every visit &nbsp;·&nbsp; ✓ No contracts &nbsp;·&nbsp; ✓ "On the way" notifications</p>
     </div>
-    <p class="hero-note">✓ Free deodorizer spray with every visit &nbsp;·&nbsp; ✓ No contracts &nbsp;·&nbsp; ✓ "On the way" notifications</p>
+    <div class="hero-image">
+      <img
+        src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&h=750&q=80"
+        alt="Happy dog in a clean yard"
+        loading="eager"
+      />
+    </div>
   </div>
 </section>
 
@@ -1091,12 +1216,22 @@
 <!-- ── WHY CHOOSE US ── -->
 <section class="why" id="why">
   <div class="section-inner">
-    <div class="section-header">
-      <p class="section-label">Why K9 Poop Busters</p>
-      <h2>The Easiest Way to Keep<br />Your Yard Clean</h2>
-      <p class="section-sub">We make dog waste removal completely hands-off, with the reliability and transparency you deserve.</p>
-    </div>
-    <div class="why-grid reveal-stagger">
+    <div class="why-split">
+      <div class="why-photo reveal">
+        <img
+          src="https://images.unsplash.com/photo-1696312448198-ce4fb832fb3d?auto=format&fit=crop&w=600&h=750&q=80"
+          alt="Happy dog sitting in a clean yard"
+          loading="lazy"
+        />
+        <div class="why-photo-badge">🌿 Free deodorizer with every visit</div>
+      </div>
+      <div>
+        <div class="section-header">
+          <p class="section-label">Why K9 Poop Busters</p>
+          <h2>The Easiest Way to Keep<br />Your Yard Clean</h2>
+          <p class="section-sub">We make dog waste removal completely hands-off, with the reliability and transparency you deserve.</p>
+        </div>
+        <div class="why-grid reveal-stagger">
       <div class="why-item">
         <div class="why-icon">📲</div>
         <div>
@@ -1139,6 +1274,8 @@
           <p>We know Phoenix yards — summer heat, AstroTurf, small lots, HOA rules. We handle it all.</p>
         </div>
       </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1150,6 +1287,16 @@
       <p class="section-label">Simple Process</p>
       <h2>Clean Yard in 4 Easy Steps</h2>
       <p class="section-sub">Getting started takes just a few minutes. We handle everything after that.</p>
+    </div>
+    <div class="how-photo-strip reveal">
+      <img
+        src="https://images.unsplash.com/photo-1597595735637-05a49627ee29?auto=format&fit=crop&w=1400&h=400&q=80"
+        alt="Dogs playing on a clean green lawn"
+        loading="lazy"
+      />
+      <div class="how-photo-strip-text">
+        <h3>We show up.<br />You <span>enjoy your yard.</span></h3>
+      </div>
     </div>
     <div class="steps reveal-stagger">
       <div class="step">
@@ -1266,11 +1413,20 @@
     <p class="section-label" style="color:#86efac;">Get Started Today</p>
     <h2>Get Your Free Quote in Seconds</h2>
     <p class="section-sub">No commitment. No contracts. Just a clean yard.</p>
-    <div class="quote-placeholder">
-      <!-- 🔌 QUOTE FORM PLUGIN GOES HERE -->
-      <p>📋 Quote form will be embedded here</p>
-      <a href="tel:6024929972" class="btn-quote">📞 Call to Get a Quote</a>
-      <p class="quote-note">Or email us at <a href="mailto:info@k9poopbusters.com" style="color:#86efac;">info@k9poopbusters.com</a></p>
+    <div class="quote-frame-wrap">
+      <iframe
+        src="https://k9poopbusters.com/sng/k9-poop-busters-gdtdc-client-onboarding/"
+        title="Get a Free Quote – K9 Poop Busters"
+        loading="lazy"
+        scrolling="yes"
+        allowtransparency="true"
+        id="quoteFrame"
+      ></iframe>
+      <!-- Fallback if iframe blocked -->
+      <div class="quote-frame-fallback" id="quoteFallback">
+        <a href="https://k9poopbusters.com/sng/k9-poop-busters-gdtdc-client-onboarding/" target="_blank" class="btn-quote">📋 Open Quote Form</a>
+        <p class="quote-note">Or call us at <a href="tel:6024929972">602-492-9972</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1484,6 +1640,33 @@
       requestAnimationFrame(step);
     }, { threshold: 0.5 });
     observer.observe(ratingEl);
+  }
+
+  // ── Quote iframe: auto-height + fallback ──
+  const quoteFrame = document.getElementById('quoteFrame');
+  const quoteFallback = document.getElementById('quoteFallback');
+  if (quoteFrame) {
+    // Show fallback if iframe errors (e.g. X-Frame-Options blocks it)
+    quoteFrame.addEventListener('error', () => {
+      quoteFrame.style.display = 'none';
+      quoteFallback.style.display = 'block';
+    });
+    // Listen for postMessage height from the page (if it sends one)
+    window.addEventListener('message', (e) => {
+      if (e.origin !== 'https://k9poopbusters.com') return;
+      if (e.data && e.data.height) {
+        quoteFrame.style.minHeight = e.data.height + 'px';
+      }
+    });
+    // Fallback: poll iframe document height (same-origin only)
+    quoteFrame.addEventListener('load', () => {
+      try {
+        const h = quoteFrame.contentDocument.body.scrollHeight;
+        if (h > 200) quoteFrame.style.minHeight = (h + 40) + 'px';
+      } catch(e) {
+        // Cross-origin — can't read height, static min-height applies
+      }
+    });
   }
 
   // ── Smooth scroll for anchor links ──
